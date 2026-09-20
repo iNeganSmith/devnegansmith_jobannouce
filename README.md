@@ -20,7 +20,7 @@ Sistema moderno de **anuncios públicos de servicios para FiveM**, diseñado par
 
 El recurso incluye adaptadores para los tres frameworks y puede detectar automáticamente el entorno cuando `Config.Framework = 'auto'`.
 
-> Nota: la configuración incluida actualmente viene preparada para Qbox/QBX. Si deseas distribuir el recurso como paquete genérico, puedes cambiar `Config.Framework` a `'auto'`.
+> La configuración incluida utiliza `Config.Framework = 'auto'`, por lo que el recurso intenta detectar automáticamente Qbox/QBX, QBCore o ESX Legacy.
 
 ## Características
 
@@ -100,7 +100,7 @@ config.lua
 Configuración incluida:
 
 ```lua
-Config.Framework = 'qbx'
+Config.Framework = 'auto'
 Config.Command = 'anuncio'
 Config.Duration = 10000
 Config.Cooldown = 30
