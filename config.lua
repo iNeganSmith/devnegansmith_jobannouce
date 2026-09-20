@@ -1,7 +1,7 @@
 Config = {}
 
 -- auto | qbx | qbcore | esx
--- Este servidor utiliza Qbox; se fija el framework para evitar detecciones ambiguas.
+-- 'auto' detecta automáticamente QBX/Qbox, QBCore o ESX Legacy.
 Config.Framework = 'auto'
 
 Config.Command = 'anuncio'
