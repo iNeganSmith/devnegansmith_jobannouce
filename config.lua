@@ -2,7 +2,7 @@ Config = {}
 
 -- auto | qbx | qbcore | esx
 -- Este servidor utiliza Qbox; se fija el framework para evitar detecciones ambiguas.
-Config.Framework = 'qbx'
+Config.Framework = 'auto'
 
 Config.Command = 'anuncio'
 Config.Duration = 10000          -- milisegundos
@@ -32,7 +32,7 @@ Config.Debug = false
 -- o cambia la propiedad logo por otro archivo de esa carpeta.
 Config.Jobs = {
     police = {
-        label = 'POLICÍA NACIONAL DEL PERÚ',
+        label = 'POLICE',
         subtitle = 'COMUNICADO OFICIAL',
         logo = 'police.png',
         accent = '#358d1f',
@@ -40,7 +40,7 @@ Config.Jobs = {
     },
 
     ambulance = {
-        label = 'ESSALUD',
+        label = 'EMS',
         subtitle = 'AVISO DE EMERGENCIA',
         logo = 'ambulance.png',
         accent = '#44dcf0',
@@ -48,7 +48,7 @@ Config.Jobs = {
     },
 
     mechanic = {
-        label = 'SERVICIO DE MECÁNICA',
+        label = 'MECHANIC',
         subtitle = 'ASISTENCIA EN CARRETERA',
         logo = 'mechanic.png',
         accent = '#e99d39',
