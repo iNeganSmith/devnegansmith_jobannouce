@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es" style="background: transparent !important; background-color: rgba(0, 0, 0, 0) !important;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Anuncios de servicios</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background: transparent !important; background-color: rgba(0, 0, 0, 0) !important;">
+    <main id="announcement-root" class="position-top-center" aria-live="polite" aria-atomic="true">
+        <section id="announcement" class="announcement" aria-hidden="true">
+            <div class="announcement__accent"></div>
+
+            <div class="announcement__logo-wrap">
+                <img id="job-logo" class="announcement__logo" alt="Logo del servicio">
+            </div>
+
+            <div class="announcement__content">
+                <div class="announcement__topline">
+                    <span class="announcement__live-dot"></span>
+                    <span id="job-subtitle" class="announcement__subtitle">ANUNCIO DE SERVICIO</span>
+                </div>
+
+                <h1 id="job-label" class="announcement__title">SERVICIO</h1>
+                <p id="announcement-message" class="announcement__message"></p>
+
+                <div id="location-row" class="announcement__location" hidden>
+                    <svg class="announcement__pin" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/>
+                    </svg>
+                    <span id="announcement-location"></span>
+                </div>
+            </div>
+
+            <div class="announcement__timer" aria-hidden="true">
+                <div id="timer-bar" class="announcement__timer-bar"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+:root {
+    --accent: #4b8dff;
+    --accent-soft: rgba(75, 141, 255, 0.2);
+    --panel: rgba(12, 16, 24, 0.94);
+    --panel-edge: rgba(255, 255, 255, 0.10);
+    --text: #f7f9fc;
+    --muted: rgba(235, 240, 248, 0.68);
+    --shadow: 0 22px 70px rgba(0, 0, 0, 0.42);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    /* Fuerza transparencia real en la NUI de FiveM y evita el lienzo negro. */
+    background: transparent !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    pointer-events: none;
+    user-select: none;
+}
+
+#announcement-root {
+    position: fixed;
+    z-index: 9999;
+    display: flex;
+    width: min(92vw, 680px);
+    padding: 2.1vh 2vw;
+}
+
+.position-top-center {
+    top: 0;
+    left: 50%;
+    justify-content: center;
+    transform: translateX(-50%);
+}
+
+.position-top-left {
+    top: 0;
+    left: 0;
+    justify-content: flex-start;
+}
+
+.position-top-right {
+    top: 0;
+    right: 0;
+    justify-content: flex-end;
+}
+
+.position-bottom-center {
+    bottom: 0;
+    left: 50%;
+    justify-content: center;
+    transform: translateX(-50%);
+}
+
+.announcement {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 15px;
+    width: min(100%, 620px);
+    min-height: 112px;
+    padding: 16px 20px 18px 17px;
+    overflow: hidden;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 14% 10%, var(--accent-soft), transparent 38%),
+        linear-gradient(135deg, rgba(22, 27, 38, 0.98), var(--panel));
+    border: 1px solid var(--panel-edge);
+    border-radius: 17px;
+    box-shadow: var(--shadow);
+    /* El desenfoque puede volver opaco el lienzo completo de NUI en FiveM. */
+    opacity: 0;
+    transform: translateY(-28px) scale(0.97);
+    visibility: hidden;
+}
+
+.announcement::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.035) 45%, transparent 68%);
+    pointer-events: none;
+}
+
+.announcement.is-entering,
+.announcement.is-visible {
+    visibility: visible;
+}
+
+.announcement.is-entering {
+    animation: announcement-in 420ms cubic-bezier(.18, .89, .32, 1.18) forwards;
+}
+
+.announcement.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.announcement.is-leaving {
+    visibility: visible;
+    animation: announcement-out 340ms cubic-bezier(.4, 0, .2, 1) forwards;
+}
+
+.announcement__accent {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background: var(--accent);
+    box-shadow: 0 0 26px var(--accent);
+}
+
+.announcement__logo-wrap {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+    align-self: center;
+    border: 1px solid var(--accent-soft);
+    border-radius: 16px;
+    background: linear-gradient(145deg, var(--accent-soft), rgba(255, 255, 255, 0.025));
+    box-shadow: inset 0 0 24px rgba(255, 255, 255, 0.025);
+}
+
+.announcement__logo {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,.30));
+}
+
+.announcement__content {
+    min-width: 0;
+    align-self: center;
+}
+
+.announcement__topline {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 3px;
+}
+
+.announcement__live-dot {
+    width: 7px;
+    height: 7px;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: var(--accent);
+    box-shadow: 0 0 11px var(--accent);
+}
+
+.announcement__subtitle {
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.announcement__title {
+    margin: 0 0 5px;
+    overflow: hidden;
+    color: var(--text);
+    font-size: clamp(17px, 1.2vw, 21px);
+    font-weight: 800;
+    letter-spacing: 0.045em;
+    line-height: 1.15;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.announcement__message {
+    margin: 0;
+    color: rgba(247, 249, 252, 0.92);
+    font-size: clamp(13px, 0.9vw, 15px);
+    font-weight: 500;
+    line-height: 1.42;
+    overflow-wrap: anywhere;
+}
+
+.announcement__location {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 11.5px;
+    font-weight: 600;
+}
+
+.announcement__location[hidden] {
+    display: none;
+}
+
+.announcement__pin {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 auto;
+    fill: var(--accent);
+}
+
+.announcement__timer {
+    position: absolute;
+    right: 16px;
+    bottom: 8px;
+    left: 17px;
+    height: 2px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(255,255,255,.065);
+}
+
+.announcement__timer-bar {
+    width: 100%;
+    height: 100%;
+    transform-origin: left center;
+    background: linear-gradient(90deg, var(--accent), rgba(255,255,255,.74));
+    box-shadow: 0 0 10px var(--accent);
+}
+
+@keyframes announcement-in {
+    from {
+        opacity: 0;
+        transform: translateY(-28px) scale(.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes announcement-out {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-18px) scale(.985);
+    }
+}
+
+@keyframes timer-countdown {
+    from { transform: scaleX(1); }
+    to { transform: scaleX(0); }
+}
+
+@media (max-width: 900px) {
+    #announcement-root {
+        width: 96vw;
+        padding: 1.6vh 2vw;
+    }
+
+    .announcement {
+        grid-template-columns: 64px 1fr;
+        gap: 12px;
+        min-height: 96px;
+        padding: 13px 15px 15px 14px;
+        border-radius: 14px;
+    }
+
+    .announcement__logo-wrap {
+        width: 60px;
+        height: 60px;
+        border-radius: 13px;
+    }
+
+    .announcement__logo {
+        width: 44px;
+        height: 44px;
+    }
+}
